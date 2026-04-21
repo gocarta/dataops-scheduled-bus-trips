@@ -38,7 +38,7 @@ bikes_allowed = {
     "2": False,
 }
 
-direction_id = {"0": "Outbound", "1": "Inbound"}
+direction_ids = {"0": "Outbound", "1": "Inbound"}
 
 wheelchair_accessible = {
     "0": None,  # unknown
@@ -77,6 +77,8 @@ with zipfile.ZipFile(zip_data) as z:
             route_id = row["route_id"]
             route = routes[route_id]
 
+            direction_id = row["direction_id"]
+
             trip = {
                 "trip_id": trip_id,
                 "route_id": route_id,
@@ -98,7 +100,8 @@ with zipfile.ZipFile(zip_data) as z:
                 "headsign": row["trip_headsign"],
                 "start_time": trip_scheduled_start_times[trip_id],
                 "end_time": trip_scheduled_end_times[trip_id],
-                "direction_id": direction_id[row["direction_id"]],
+                "direction_id": direction_id,
+                "direction_value": direction_ids[direction_id],
                 "block_id": row["block_id"],
                 "shape_id": row["shape_id"],
                 "wheelchair_accessible": wheelchair_accessible[
@@ -140,6 +143,7 @@ client.update_dataset(
         "start_time",
         "end_time",
         "direction_id",
+        "direction_value",
         "block_id",
         "shape_id",
         "wheelchair_accessible",
