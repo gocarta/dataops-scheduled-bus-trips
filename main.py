@@ -101,7 +101,7 @@ with zipfile.ZipFile(zip_data) as z:
                 "start_time": trip_scheduled_start_times[trip_id],
                 "end_time": trip_scheduled_end_times[trip_id],
                 "direction_id": direction_id,
-                "direction_value": direction_ids[direction_id],
+                "direction": direction_ids[direction_id],
                 "block_id": row["block_id"],
                 "shape_id": row["shape_id"],
                 "wheelchair_accessible": wheelchair_accessible[
@@ -143,7 +143,7 @@ client.update_dataset(
         "start_time",
         "end_time",
         "direction_id",
-        "direction_value",
+        "direction",
         "block_id",
         "shape_id",
         "wheelchair_accessible",
